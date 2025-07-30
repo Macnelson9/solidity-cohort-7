@@ -289,3 +289,8 @@ describe("BlockToken Test Suite", () => {
 
 // Test onlyowner, notAmount, revert if user tries to burn insufficient amount
 // Test all the public and external functions from the ERC20
+
+// A simple marketplace where you accept ERC20 as payments, and also native tokens e.g ETH
+// Should have buy and sell, should also have offer, listings, people can come snd buy directly for a price and can also offer native tokens and also accept the native tokens
+// On listing, the token should be locked in your martketplace, You must be the owner of the token and should call safeTransferFrom and hold
+// Keep 3% commission or fee on every sale
