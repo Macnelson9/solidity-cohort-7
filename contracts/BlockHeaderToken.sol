@@ -29,9 +29,15 @@ pragma solidity ^0.8.0;
 //         _burn(msg.sender, _amount);
 //     }
 
+<<<<<<< HEAD
 //     function burnFrom(address _user, uint256 _amount)onlyOwner notAmount0(_amount) external {
 //         _burn(_user, _amount);
 //     }
+=======
+    function burnFrom(address _user, uint256 _amount) onlyOwner notAmount0(_amount) external {
+        _burn(_user, _amount);
+    }
+>>>>>>> e794d40fc83cfcfae9abbd84d80ccbe6a8907cf2
 
 
 // }

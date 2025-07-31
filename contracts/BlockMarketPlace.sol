@@ -27,9 +27,9 @@ contract BlockMarketPlace {
 mapping (uint256 listid => Listing list) public idToListing;
 mapping (uint256 offerid => OfferDetails offer) public idToOffer;
 
-uint256 lastUpdatedid;
-uint256 lastOfferId;
-address marketOwner;
+uint256 public lastUpdatedid;
+uint256 public lastOfferId;
+address public marketOwner;
 
     constructor() {
         marketOwner = msg.sender;
@@ -40,7 +40,7 @@ address marketOwner;
        require(list.price > 0, "Invalid price");
        require(list.minOffer > 0, "Invalid min offer");
        if(list.isNative){
-        require(address(list.paymentToken) == address(0));
+        require(address(list.paymentToken) == address(0), "ERC20 Payment is not supported");
        }
         Listing memory listing;
         listing.owner = msg.sender;
@@ -55,7 +55,9 @@ address marketOwner;
 
         IERC721(list.NftToken).transferFrom(msg.sender, address(this), list.tokenId);
     }
-
+    function getListing(uint256 listId) external view returns(Listing memory){
+        return idToListing[listId];
+    }
     function buyNft(uint256 listId) external payable {
         Listing memory l = idToListing[listId];
         require(!l.sold, "ALready Sold");
@@ -92,6 +94,10 @@ address marketOwner;
         offer_.offerAmount = l.isNative ? msg.value : offerAmount;
 
         idToOffer[offerId] = offer_;
+    }
+
+    function getOffer(uint256 offerId) external view returns(OfferDetails memory o) {
+        o = idToOffer[offerId];
     }
 
     function acceptOffer(uint256 offerid) external {
