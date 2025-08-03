@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
-pragma solidity 0.8.28;
+pragma solidity ^0.8.28;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
@@ -71,7 +71,7 @@ address public marketOwner;
             require(ss, "MarketOwner Transfer failed");
         }else{
             l.paymentToken.transferFrom(msg.sender, l.owner, l.price * 97/100);
-            l.paymentToken.transferFrom(msg.sender, marketOwner, l.price * 3/100);
+            l.paymentToken.transferFrom(msg.sender, marketOwner, l.price * 3/100); 
         }
         IERC721(l.NftToken).transferFrom(address(this), msg.sender, l.tokenId);
     }
